@@ -17,7 +17,7 @@ sub _run_server {
   my $pkg = $class;
   if (my $isa = $value->{isa}) {
     eval "require $isa; 1" or die;
-    my $pkg = $already{ $class, $isa } ||= Package::Generator->new_package({
+    $pkg = $already{ $class, $isa } ||= Package::Generator->new_package({
       base => $class,
       isa  => [ $class, $isa ],
     });
