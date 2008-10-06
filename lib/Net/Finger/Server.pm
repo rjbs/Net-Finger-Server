@@ -1,18 +1,28 @@
 use strict;
 use warnings;
 package Net::Finger::Server;
-use base 'Net::Server';
 # ABSTRACT: a simple finger server
 
+use Package::Generator;
 use Sub::Exporter -setup => {
   collectors => [ '-run' => \'_run_server' ]
 };
 
+my %already;
 sub _run_server {
   my ($class, $value) = @_;
   $value ||= {};
   $value->{port} ||= 79;
-  $class->run(port => $value->{port});
+
+  my $pkg = $class;
+  if (my $isa = $value->{isa}) {
+    my $pkg = $already{ $class, $isa } ||= Package::Generator->new_package({
+      base => $class,
+      isa  => [ $class, $isa ],
+    });
+  }
+
+  $pkg->run(port => $value->{port});
 }
 
 =head1 SYNOPSIS
@@ -27,6 +37,10 @@ You can also:
   use Net::Finger::Server -run => { port => 1179 };
 
 ...if you want.
+
+Actually, both of these are sort of moot unless you also provide an C<isa>
+argument, which sets the base class for the created server.
+Net::Finger::Server is, for now, written to work as a Net::Server subclass.
 
 =head1 DESCRIPTION
 
