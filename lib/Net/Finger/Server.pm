@@ -26,7 +26,8 @@ sub _run_server {
     });
   }
 
-  $pkg->run(%config);
+  my $server = $pkg->new(%config);
+  $server->run;
 }
 
 =head1 SYNOPSIS
