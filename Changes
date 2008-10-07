@@ -1,5 +1,8 @@
 Revision history for Net-Finger-Server
 
+0.002     2008-10-06
+          improve -run
+
 0.002     2008-10-05
           extend -run to allow @ISA alteration
 

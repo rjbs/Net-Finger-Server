@@ -12,10 +12,13 @@ my %already;
 sub _run_server {
   my ($class, $value) = @_;
   $value ||= {};
-  $value->{port} ||= 79;
+
+  my %config = %$value;
+
+  $config{port} ||= 79;
 
   my $pkg = $class;
-  if (my $isa = $value->{isa}) {
+  if (my $isa = delete $config{isa}) {
     eval "require $isa; 1" or die;
     $pkg = $already{ $class, $isa } ||= Package::Generator->new_package({
       base => $class,
@@ -23,7 +26,7 @@ sub _run_server {
     });
   }
 
-  $pkg->run(port => $value->{port});
+  $pkg->run(%config);
 }
 
 =head1 SYNOPSIS
