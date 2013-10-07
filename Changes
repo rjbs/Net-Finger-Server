@@ -1,6 +1,8 @@
 Revision history for Net-Finger-Server
 
 {{$NEXT}}
+
+0.004     2013-10-06 22:51:16 America/New_York
         - update metadata
         - repackage with non-ancient dzil for great justice
 
