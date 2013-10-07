@@ -1,5 +1,9 @@
 Revision history for Net-Finger-Server
 
+{{$NEXT}}
+        - update metadata
+        - repackage with non-ancient dzil for great justice
+
 0.003     2008-10-06
           improve -run
 
