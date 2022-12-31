@@ -161,7 +161,7 @@ sub process_request {
   my $verbose = $query =~ s{\A/W\s*}{};
   my $u_regex = $self->username_regex;
   my $h_regex = $self->hostname_regex;
-  
+
   if ($query eq '') {
     $self->_reply( $self->listing_reply({ verbose => $verbose }));
     return;
